@@ -1,0 +1,287 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.back{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.book-container {
+    display: flex;
+    align-items: flex-start;
+    background-color: #ffffff;
+    padding: 35px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.book-cover {
+    margin-right: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.book-cover img {
+    width: 200px;
+    border-radius: 8px;
+}
+
+.book-date {
+    position: absolute;
+    top: 0;
+    left: -30px; /* Ajusta este valor según sea necesario */
+    height: 100%; /* Hace que la altura de la fecha coincida con la de la imagen */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra el contenido dentro del contenedor */
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    background-color: #003366;
+    color: #ffcc00;
+    padding: 3px;
+    border-radius: 4px;
+    text-align: center; /* Asegura que el texto abarque todo el contenedor */
+    white-space: nowrap; /* Evita que el texto se divida en múltiples líneas */
+}
+
+.book-details h1 {
+    color: #1f2937;
+}
+
+.book-details p {
+    margin: 8px 0;
+}
+
+.book-details .link {
+    color: #1f2937;
+    text-decoration: none;
+}
+
+.book-details .link:hover {
+    text-decoration: underline;
+}
+
+.buttons {
+    align-self: flex-end; /* Mueve los botones al lado derecho */
+    display: flex; 
+    gap: 10px;
+}
+
+.btn-read, .btn-favorite {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.btn-read {
+    background-color: #ffcc00;
+    color: #003366;
+}
+
+.btn-read:hover {
+    background-color: yellow;
+    font-weight: bolder;
+}
+
+.btn-favorite {
+    background-color: #003366;
+    color: white;
+}
+
+.btn-favorite:hover {
+    background-color: blue;
+    font-weight: bolder;
+}
+
+.hd {
+    color: navy; /* Azul marino */
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bolder;
+    font-style: italic;
+    text-align: justify;
+    font-size: medium;
+}
+
+.hdtesis {
+    color: navy; /* Azul marino */
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bolder;
+    font-style: italic;
+    font-size: medium;
+    text-align: justify;
+}
+.strg{
+    color: #ffcc00;
+    font-family: "Raleway",sans-serif;
+    font-weight: bolder;
+}
+
+.pd {
+    color: #003366; /* Azul marino */
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 650;
+    font-style: italic;
+    text-align: justify;
+}
+
+/* Modal Styles */
+.modal-container {
+    visibility: hidden; /* Inicialmente oculto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0033668e; /* Fondo semitransparente #ffcc00 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #000; /* Color de icono de cerrar */
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #ff0000;
+}
+
+.close-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #003366; /* Azul marino */
+    border: 1px solid #ffcc00;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #ffcc00;
+   
+}
+
+.close-btn p {
+    margin: 0;
+    
+}
+
+.close-btn p:hover {
+    margin: 0;
+    
+}
+
+.close-btn:hover {
+    background-color: #ffcc00;
+    border: 1px solid #003366;
+    color: #003366;
+}
+
+.svgLogo{
+    text-align: center;   
+}
+
+.modalTitle{
+    color: #003366; /* Azul marino */
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bolder;
+    font-style: italic;
+}
+
+.modalMessage{
+    color: #003366; /* Azul marino */
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bolder;
+    font-style: italic;
+    font-size: 20px;
+}
+
+/* Modal book estilos */
+.modal {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content-book {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 900px; /* Limitar el ancho máximo */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrar el modal */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.close-book {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.close-book:hover,
+.close-book:focus {
+    color: black;
+    text-decoration: none;
+}
+
+#plinkBook{
+    
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 650;
+    font-style: italic;
+    text-align: center;
+    text-decoration: none;
+}
+
+#plinkBook:hover{
+    
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .modal-content-book {
+        width: 95%;
+        max-width: none;
+    }
+
+    iframe {
+        height: 400px; /* Ajustar altura para dispositivos más pequeños */
+    }
+}

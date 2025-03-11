@@ -1,0 +1,30 @@
+:root {
+    --color-primary:#2ea3f2;
+    --color-text: #666;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Layout settings */
+
+nav {
+    display: flex;
+    width: 100vw;
+    height: 80px;
+    background-color: rgba(100, 148, 237, 0.164);
+}
+
+nav ul{
+    list-style: none;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: #fff;
+}
+
+/*===================MODAL============*/

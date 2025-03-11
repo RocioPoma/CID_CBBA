@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesis y Libros Favoritos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .books-container, .thesis-container {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+        .card img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .card h3 {
+            margin: 15px 0 10px;
+        }
+        .card p {
+            color: #666;
+        }
+        .button {
+            background-color: #4caf50; /* Verde */
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 10px 10px 0; /* Ajuste para los botones */
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="books-container">
+            <h2>Libros Favoritos</h2>
+            {% for favorite in favorites %}
+                {% if favorite.book %}
+                <div class="card" id="favorite-{{ favorite.id }}">
+                    {% if favorite.book.images %}
+                    <img src="{{ favorite.book.images.url }}" alt="{{ favorite.book.title }}">
+                    <h3>{{ favorite.book.title }}</h3>
+                    <p>{{ favorite.book.description }}</p>
+                    <a href="{{ favorite.book.files.url }}" class="button">Ver PDF</a>
+                    <form method="post" class="delete-form" data-id="{{ favorite.id }}">
+                        {% csrf_token %}
+                        <button type="submit" class="button delete-button">Delete</button>
+                    </form>
+                    {% endif %}
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="thesis-container">
+            <h2>Tesis Favoritas</h2>
+            {% for favorite in favorites %}
+                {% if favorite.thesis %}
+                <div class="card" id="favorite-{{ favorite.id }}">
+                    {% if favorite.thesis.images %}
+                    <img src="{{ favorite.thesis.images.url }}" alt="{{ favorite.thesis.title }}">
+                    <h3>{{ favorite.thesis.title }}</h3>
+                    <p>{{ favorite.thesis.description }}</p>
+                    <a href="{{ favorite.thesis.files.url }}" class="button">Ver PDF</a>
+                    <form method="post" class="delete-form" data-id="{{ favorite.id }}">
+                        {% csrf_token %}
+                        <button type="submit" class="button delete-button">Delete</button>
+                    </form>
+                    {% endif %}
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.delete-form').forEach(form => {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();  // Previene la recarga de la página
+                const favoriteId = this.getAttribute('data-id');
+                const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+                console.log(`Attempting to delete favorite with ID: ${favoriteId}`);
+                console.log(`CSRF Token: ${csrftoken}`);
+
+                fetch(`/delete_favorite/${favoriteId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': csrftoken,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({})
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log('Favorite deleted successfully');
+                        document.getElementById(`favorite-${favoriteId}`).remove();
+                    } else {
+                        console.error(data.error);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    </script>
+</body>
+</html>

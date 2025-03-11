@@ -1,0 +1,110 @@
+{% extends 'inicio/baseHome.html' %}
+
+{% block content %}
+    
+        <h2 class="titleart">Articles</h2>
+        <div class="horizontal-form">
+            <form id="searchForm" class="horizontal-form" method="GET" action="{% url 'filter_by_articleArea' %}">
+                <label for="areasA">Filter by area:</label>
+
+                <select name="select" id="filter1" class="filvalue">
+                    <option>Precione filter para activar búsqueda</option>
+                    {% for area in areasA %}
+                    <option value="{{ area.areaname }}"
+                        {% if area.areaname == selected_area %}
+                            selected
+                        {% endif %}>
+                        {{ area.areaname }}
+                    </option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Filter</button>
+            </form>
+            <form class="horizontal-form" method="GET" action="{% url 'filter_by_articleCampo' %}">
+                <label for="campos">Filter by campo:</label>
+                <select name="select" class="filvalue">
+                    <option>Precione filter para activar búsqueda</option>
+                    {% for campo in campos %}
+                        <option value="{{ campo.campoName  }}">
+                            {% if campo.campoName == selected_campo %}
+                            select
+                            {% endif %}
+                            {{ campo.campoName }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Filter</button>
+            </form>
+            <a href="{% url 'article' %}" class="buttonarticle">View all</a>
+        </div>
+
+
+        <!--div class="content" id="mostrador">
+            {% for article in articles  %}
+            <div class="galeria-wrapper">
+                <div class="galeria">
+                    <div class="foto" data-pdf-url="{{ article.articleFiles.url }}" onclick="openModalArticle(this)" data-article-title="{{ article.articleTitle }}">
+                        {% if  article.articleImages %}
+                            <img src="{{ article.articleImages.url }}" alt="" class="imgarticle">
+                        {% endif %}
+                    </div>
+                    
+                    <div class="pie">
+                        <div class="piecontent">
+                            <p class="descripcion" id="ptitle1"> <strong class="dspart"> Área:</strong> {{article.articleArea}} </p>
+                            <p class="descripcion" id="ptitle1"> <strong class="dspart"> Campo:</strong> {{article.articleCampo}}</p>
+                        </div>
+                    </div>
+                </div>  
+            <div>                
+            {% endfor %}
+                        
+        </div-->
+
+        <div class="content" id="mostrador">
+            {% for article in articles %}
+            <div class="galeria-wrapper">
+                <div class="galeria">
+                    <div class="foto" data-pdf-url="{{ article.articleFiles.url }}" onclick="openModalArticle(this)" data-article-title="{{ article.articleTitle }}">
+                        {% if article.articleImages %}
+                            <img src="{{ article.articleImages.url }}" alt="" class="imgarticle">
+                        {% endif %}
+                    </div>
+                    <div class="pie">
+                        <div class="piecontent">
+                            <table>
+                                <tr>
+                                    <td class="borderart"><strong class="dspart">Área:</strong></td>
+                                    <td class="borderart">{{article.articleArea}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="borderart"><strong class="dspart">Campo:</strong></td>
+                                    <td class="borderart">{{article.articleCampo}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>  
+            </div>                
+            {% endfor %}
+        </div>
+        
+        
+        
+        
+
+
+        <div id="myModal" class="modal">
+                <div class="modal-content-book">
+                
+                    <span class="close-book" onclick="closeModalArticle()">&times;</span>
+                    <h2>{{article.articleTitle}}</h2>
+                    <iframe id="pdfViewer" width="100%" height="500px"></iframe>
+
+                
+                </div>
+        </div>
+        
+
+
+{% endblock %}

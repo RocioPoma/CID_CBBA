@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.Favtitle{
+    color: #003366; /* Azul marino */
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 750;
+    font-style: italic;
+}
+.slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 80%;
+    margin: 50px auto;
+}
+
+.slider-wrapper {
+    overflow: hidden;
+    width: 100%;
+}
+
+.slider-cards {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card {
+    min-width: 200px;
+    margin: 10px;
+    padding: 20px;
+    background-color: #003366b7;
+    text-align: center;
+    border: 3px solid #ffcc00;
+    border-radius: 15px;
+}
+
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.icon {
+    margin: 0 20px; /* Aumenta el margen entre los iconos */
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #003366; /* Azul oscuro */
+    color: #ffffff; /* Blanco */
+    border: 1px solid #ffcc00; /* Amarillo */
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem; /* Tamaño de fuente reducido */
+}
+
+.icon svg {
+    margin: 0 30px; /* Añade margen específico para los iconos SVG */
+}
+
+
+
+
+.icon:hover {
+    background-color: #ffcc00; /* Yellow */
+    color: #003366; /* Dark Blue */
+}
+
+.left-arrow, .right-arrow {
+    cursor: pointer;
+    font-size: 2.5rem;
+    background-color: #ffcc00c9;
+    border: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    border-radius: 10px;
+    border: 1px solid #003366;
+}
+
+.left-arrow:hover, .right-arrow:hover {
+    background-color: #ffffffaf;
+    border-radius: 10px;
+    border: 1px solid #003366;
+}
+.left-arrow {
+    left: 10px;
+    color: #003366;
+}
+
+.right-arrow {
+    right: 10px;
+    color: #003366;
+}
+
+
+.titleFav{
+    color: #ffffff; /* Azul marino */
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 750;
+    font-style: italic;
+    font-size: 16px;
+}
+
+.authorFav{
+    color: darkgray;
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bolder;
+    font-style: italic;
+    font-size: 16px;
+}
+
+.imfFav{
+    border-radius: 15px;
+    border: 1px solid #ffcc00;
+}
+
+.containerFav {
+    background-color: #003366; /* Color de fondo azul oscuro */
+    padding: 10px;
+    border-radius: 5px;
+    color: #ffffff; /* Texto en color blanco */
+    font-family: "Raleway", sans-serif;
+}
+
+.labelFilterFav {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffcc00; /* Texto del label en color amarillo */
+    font-family: "Raleway", sans-serif;
+}
+
+.filterFav {
+    font-size: 14px;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #003366; /* Borde en color amarillo */
+    border-radius: 3px;
+    background-color: #ffffff; /* Fondo del select en blanco */
+    color: #003366; /* Texto del select en azul oscuro */
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+}
+
+
+
+/* General Styles */
+
+.modal-resumen {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Queda fijo en la pantalla */
+    z-index: 1; /* Queda sobre todo el contenido */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Habilita scroll si es necesario */
+    background-color: #003366a9; /* Fondo oscuro semi-transparente */
+}
+
+.modal-content-book-resumen {
+    background-color: #003366; /* Fondo blanco */
+    margin: 10% auto; /* 10% desde arriba, centrado horizontalmente */
+    padding: 20px;
+    border: 2px solid #ffcc00;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px; /* Ancho máximo */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: auto; /* Habilita scroll si es necesario */
+    color: #ffcc00;
+}
+
+.close-summary {
+    color: #ffcc00; /* Color amarillo */
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-summary:hover,
+.close-summary:focus {
+    color: #ffffff; /* Color azul oscuro en hover */
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.card-summary {
+    background-color: #ffffff; /* Fondo blanco */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px #ffcc00;;
+    margin-top: 10px;
+    color: #003366; /* Color del texto */
+    max-height: 400px; /* Altura máxima */
+    overflow-y: auto; /* Scroll vertical si es necesario */
+}
+
+.card-summary .pResumen {
+    color: #003366; /* Color del texto */
+    font-family: "Raleway", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Header Styles */
+.h2Resumen {
+    color: #ffcc00; /* Color del texto */
+    font-family: "Raleway", sans-serif;
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bolder;
+    font-style: italic;
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desktop</title>
+    <!-- BOX ICONS -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="{% static 'css/stylesDesktop.css' %}">
+    <!-- CUSTOM JS -->
+</head>
+<body>
+
+    <div class="menu-dashboard">
+        <!-- TOP MENU -->
+        <div class="top-menu">
+            <div class="logo">
+                <ul class="flex items-center gap-6 text-sm">
+                    <img src="{% static 'img/logo.svg' %}" alt="Logo">
+                    Hola,
+                    {% if user.is_authenticated %}
+                    <span>{{ user.username }}</span>
+                    {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+        </div>
+        <!-- INPUT SEARCH -->
+        <!--div class="input-search">
+            <i class='bx bx-search'></i>
+            <input type="text" class="input" placeholder="Buscar">
+        </div-->
+        <div class="btn-home">
+            <a href="{% url 'home' %}">
+                <button class="home-button">
+                    Home
+                </button>
+            </a>
+        </div>
+        
+        <!-- MENU -->
+        <div class="menu">
+            
+            <div class="enlace">
+                <i class="bx bx-grid-alt"></i>
+               <span>Contact us</span>
+            </div>
+        
+
+            <div class="enlace">
+                <i class="bx bx-user"></i>
+                <span>CIDBot</span>
+            </div>
+
+            <div class="enlace">
+                <i class="bx bx-grid-alt"></i>
+                <span>Automation</span>
+            </div>
+
+            <div class="enlace">
+                <i class="bx bx-message-square"></i>
+                <span>Feedback</span>
+            </div>
+
+            <div class="enlace">
+                <i class="bx bx-file-blank"></i>
+                <span>Files</span>
+            </div>
+
+            <div class="enlace">
+                <i class="bx bx-heart"></i>
+                <span>My List</span>
+            </div>
+
+            <div class="enlace">
+                <i class="bx bx-cog"></i>
+                <span>My Profile</span>
+            </div>
+
+            <div class="enlace">
+                <i class="bx bx-cog"></i>
+                <span>Logout</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-content">
+        <!-- Aquí se cargará el contenido -->
+    </div>
+    
+</body>
+<script src="{% static 'js/mainDesktop.js' %}"></script>
+</html>

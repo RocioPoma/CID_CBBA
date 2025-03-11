@@ -1,0 +1,76 @@
+{% extends 'layout/base.html' %}
+
+{% block 'title' %} Books {% endblock  %}
+
+{% block 'content' %}
+{% include 'book/partials/by_Bookarea.html' %}
+{% include 'book/partials/search.html' %}
+{% include 'book/partials/by_initial.html' %}
+
+<br>
+<a
+  class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-600 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+  href="{% url 'book' %}" 
+>
+  <span class="absolute -start-full transition-all group-hover:start-4">
+    <svg
+      class="size-5 rtl:rotate-180"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M17 8l4 4m0 0l-4 4m4-4H3"
+      />
+    </svg>
+  </span>
+
+  <span class="text-sm font-medium transition-all group-hover:ms-4"> View all </span>
+       </a>
+       
+       <div class="overflow-x-auto">
+              <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+                <thead class="ltr:text-left rtl:text-right">
+                  <tr>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Title</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Author</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Area</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Pages</th>
+                    <th class="px-4 py-2"></th>
+                  </tr>
+                </thead>
+                {% for book in  books %}
+                <tbody class="divide-y divide-gray-200">
+                  <tr>
+                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                     <div class="flex items-end gap-4">
+                            {% if  book.images %}
+                            <img
+                              src="{{ book.images.url }}"
+                              alt=""
+                              class="size-20 rounded-lg object-cover"
+                            />
+                            {% endif %}
+                            {{ book.title }}</td>
+                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ book.author }}</td>
+                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ book.area }}</td>
+                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ book.pages }}</td>
+                    <td class="whitespace-nowrap px-4 py-2">
+
+                     <span>
+                            <a href="{% url 'book_view' id=book.id %}" class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700">View</a>
+                     <span>
+
+                    </td>
+                  </tr>
+                  {% endfor %}
+            
+                </tbody>
+              </table>
+       </div>
+       
+{% endblock  %}

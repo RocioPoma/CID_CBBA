@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.card-body {
+    background-color: rgba(0, 51, 102, 0.8); /* Fondo azul marino transparente */
+    border-radius: 10px;
+    padding: 20px;
+}
+.card-title {
+    color: #FFFFFF; /* Texto blanco */
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.card-link {
+    color: #FFCC00 !important; /* Enlaces en amarillo */
+    font-weight: bold;
+}
+.card-link:hover {
+    color: #FFFFFF !important; /* Enlaces en blanco al pasar el cursor */
+}
+.btn-primary {
+    background-color: #003366; /* Botón azul marino */
+    border-color: #003366;
+    color: #FFFFFF;
+}
+.btn-primary:hover {
+    background-color: #FFCC00; /* Botón amarillo al pasar el cursor */
+    border-color: #FFCC00;
+    color: #003366;
+}
+.form-control {
+    background-color: rgba(255, 255, 255, 0.7); /* Campo de entrada con fondo blanco semitransparente */
+    color: #003366;
+    border: 1px solid #FFCC00; /* Borde amarillo */
+}
+.form-control:focus {
+    background-color: #FFFFFF; /* Fondo blanco al enfocar */
+    color: #003366;
+    border-color: #003366;
+}
+::placeholder {
+    color: #FFCC00; /* Color del texto del marcador de posición en amarillo */
+}
+
+ul{
+    color: #FFCC00;
+}
+
+.form-text{
+    color: #FFCC00;
+}
+
+.h3b {
+    color: #003366; /* Azul marino */
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 750;
+    font-style: italic;
+}

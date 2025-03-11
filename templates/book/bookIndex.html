@@ -1,0 +1,119 @@
+{% extends 'inicio/baseHome.html' %}
+{% block content %}
+    
+    <div class="container">
+        <br>
+        <div class="search-filter-bar">
+            <form class="search-bar" action="{% url 'book' %}" method="GET">
+                <div id="input-group col-md-12">
+                    <span class="input-group-list">
+                    <input type="text" name="search" placeholder="Search...">
+                    <button type="submit" value="search-bar">Buscar</button>
+                </span>
+                </div>
+            </form>
+            <form class="filter" method="GET" action="{% url 'filter_by_area' %}">
+                <label for="areas">Filtrar por área:</label>
+                <select name="select" class="select" >
+                    <option>Presione filter para iniciar</option>
+                    {% for area in areas %}
+                    
+                    <option value="{{ area.areaname }}" 
+                        {% if area.areaname == selected_area %}
+                            selected
+                        {% endif %}>
+                        {{ area.areaname}}
+                    </option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Filter</button>
+            </form>
+            
+        </div>
+
+        <br>
+        <div>
+            <ul class="alphabet-list">
+                <a href="{% url 'book' letter='a' %}" class="alphabet-link">A</a>
+                <a href="{% url 'book' letter='b' %}" class="alphabet-link">B</a>
+                <a href="{% url 'book' letter='c' %}" class="alphabet-link">C</a>
+                <a href="{% url 'book' letter='d' %}" class="alphabet-link">D</a>
+                <a href="{% url 'book' letter='e' %}" class="alphabet-link">E</a>
+                <a href="{% url 'book' letter='f' %}" class="alphabet-link">F</a>
+                <a href="{% url 'book' letter='g' %}" class="alphabet-link">G</a>
+                <a href="{% url 'book' letter='h' %}" class="alphabet-link">H</a>
+                <a href="{% url 'book' letter='i' %}" class="alphabet-link">I</a>
+                <a href="{% url 'book' letter='j' %}" class="alphabet-link">J</a>
+                <a href="{% url 'book' letter='k' %}" class="alphabet-link">K</a>
+                <a href="{% url 'book' letter='l' %}" class="alphabet-link">L</a>
+                <a href="{% url 'book' letter='m' %}" class="alphabet-link">M</a>
+                <a href="{% url 'book' letter='n' %}" class="alphabet-link">N</a>
+                <a href="{% url 'book' letter='ñ' %}" class="alphabet-link">Ñ</a>
+                <a href="{% url 'book' letter='o' %}" class="alphabet-link">O</a>
+                <a href="{% url 'book' letter='p' %}" class="alphabet-link">P</a>
+                <a href="{% url 'book' letter='q' %}" class="alphabet-link">Q</a>
+                <a href="{% url 'book' letter='r' %}" class="alphabet-link">R</a>
+                <a href="{% url 'book' letter='s' %}" class="alphabet-link">S</a>
+                <a href="{% url 'book' letter='t' %}" class="alphabet-link">T</a>
+                <a href="{% url 'book' letter='u' %}" class="alphabet-link">U</a>
+                <a href="{% url 'book' letter='v' %}" class="alphabet-link">V</a>
+                <a href="{% url 'book' letter='w' %}" class="alphabet-link">W</a>
+                <a href="{% url 'book' letter='x' %}" class="alphabet-link">X</a>
+                <a href="{% url 'book' letter='y' %}" class="alphabet-link">Y</a>
+                <a href="{% url 'book' letter='z' %}" class="alphabet-link">Z</a>
+            </ul>
+        </div>
+
+        
+        <h2 class="h2a">LIBROS</h2>
+        <a href="{% url 'book' %}" class="button">Mostrar todo</a>
+        <table>
+            <thead>
+                <tr>
+                    <th class="titulos">ID</th>
+                    <th class="titulos">Portada</th>
+                    <th class="titulos">Título</th>
+                    <th class="titulos">Autor</th>
+                    <th class="titulos">Área</th>
+                    <!--th class="titulos">Pages</th-->
+                    <th class="titulos">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in page_obj %}
+                <tr>
+                    <td class="contentBook">{{ book.id }}</td>
+                    <td>
+                        {% if book.images %}
+                        <img src="{{ book.images.url }}" alt="" class="size-20 rounded-lg object-cover" width="70" />
+                        {% endif %}
+                    </td>
+                    <td class="contentBook">{{ book.title }}</td>
+                    <td class="contentBook">{{ book.author }}</td>
+                    <td class="contentBook">{{ book.area }}</td>
+                    <!--td class="contentBook">{{ book.pages }}</td-->
+                    <td class="contentBook"><a href="{% url 'book_view' id=book.id %}" class="button">Ver</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1" class="pagbtn">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="pagbtn">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="pagbtn">next</button></a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="pagbtn">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>  
+
+{% endblock %}

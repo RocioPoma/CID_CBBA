@@ -1,0 +1,10 @@
+<form method="GET" action="{% url 'filter_by_area' %}">
+    <label for="areas">Filter by area:</label>
+    <select name="select" class="select">
+        {% for area in areas %}
+            <option value="{{ area.areaname }}">{{ area.areaname }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Filter</button>
+</form>
+

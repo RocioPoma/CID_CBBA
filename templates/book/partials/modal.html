@@ -1,0 +1,19 @@
+
+
+<a href="#myModal" class="modal-open">Tócame</a>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <div class="close-btn">
+            <a class="modal-close" href="#">&times;</a>
+        </div>
+        <h2>{{ book.title }}</h2>
+        <div class="modal-img">
+            {% if book.files %}
+                <embed src="{{ book.files.url }}" type="application/pdf" width="420px" height="630px">
+            {% else %}
+                <p>No se ha encontrado el archivo PDF.</p>
+            {% endif %}
+            <p>{{ book.author }}</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor Personal |  {% block 'title' %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stylesModal.css' %}">
+    <!--link rel="stylesheet" href="{% static 'css/magazine.css' %}"-->
+    <link rel="stylesheet" href="{% static 'pdf/revista.pdf' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+</head>
+<body>
+    <header class="bg-white">
+        {% include 'layout/partials/menu.html' %}
+
+        <main>
+
+        {% block  'content' %}
+        {% endblock %}
+    
+     </main>
+    </header>
+
+
+    {% block 'scripts' %}{% endblock  %}
+    <script src="{% static 'js/magazine.js' %}" ></script>
+
+    
+    
+   
+</body>
+</html>

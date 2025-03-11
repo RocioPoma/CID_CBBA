@@ -1,0 +1,183 @@
+{% extends 'inicio/baseHome.html' %}
+{% block content %}
+    <div class="back">
+        <a href="{% url 'book' %}" >
+        <button class="btn-read">Atrás</button>
+        </a>
+    </div>
+    <div class="book-container">
+        <div class="book-cover">
+            {% if  book.images %}
+            <img src="{{ book.images.url }}" alt="{{ book.title }}">
+            {% endif %}
+            <div class="book-date"><p> Publicado en:</p>{{ book.publish_date }}<p></p></div>
+        </div>
+        <div class="book-details">
+            <h1 class="hd">{{ book.title }}</h1>
+            <!--p class="pd"><strong>ID:</strong> {{ book.id }}.</p-->
+            <p class="pd"><strong class="strg">Autor:</strong> {{ book.author }}.</p>
+            <p class="pd"><strong class="strg">Área:</strong> {{ book.area }}.</p>
+            <p class="pd"><strong class="strg">Área2:</strong> {{ book.area2 }}.</p>
+            <p class="pd"><strong class="strg">Editorial:</strong> {{ book.editorial }}.</p>
+            <p class="pd"><strong class="strg">Edición:</strong> {{ book.edition }}.</p>
+            <p class="pd"><strong class="strg">Páginas:</strong> {{ book.pages }}</p>
+            <p class="pd"><strong class="strg">Descripción:</strong> {{ book.description }}. </p>
+            <p class="pd"><strong class="strg">Keyword:</strong> {{ book.kword }} </p>
+            <p class="pd"><strong class="strg">Código de libro:</strong> {{ book.codLib }} </p>
+            <!--p class="pd"><strong>Archivos:</strong> <a href="{{ book.files.url }}" class="link">Ver PDF</a></p-->
+            <div class="buttons">
+                <!--a href="{{ book.files.url }}"><button class="btn-read">View document</button></a-->
+                <button  class="btn-read" onclick="openModalBook()">Ver PDF</button>
+                <a ><button class="btn-favorite" id="openModal" data-item-id="{{book.id}}">Agregar a Favoritos</button></a>
+            </div>
+        </div>
+    </div>
+<!-- book_detail.html -->
+
+
+
+<div id="myModal" class="modal">
+    <div class="modal-content-book">
+        <!--div class="toolbar">
+            <button onclick="prevPage()">Página Anterior</button>
+            <button onclick="nextPage()">Página Siguiente</button>
+            <button onclick="zoomIn()">Acercar</button>
+            <button onclick="zoomOut()">Alejar</button>
+        </div-->
+        <span class="close-book" onclick="closeModalBook()">&times;</span>
+        <iframe id="pdfViewer" src="{{ book.files.url }}#toolbar=0" width="100%" height="600px" ></iframe>
+        <!--canvas id="pdfCanvas"></canvas-->
+    </div>
+</div>
+
+
+
+
+
+
+   <!--modal aviso-->
+    <div id="modal" class="modal-container">
+        <div class="modal-content">
+            <span id="close" class="close">&times;</span>
+            <h2 id="modal-title" class="modalTitle"></h2>
+            <div class="svgLogo">
+            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#ffcc00"><path d="M635-150h40v-150h-40v150Zm20-189q8 0 14-6.15t6-14.35q0-8.2-6-14.35T655-380q-9 0-14.5 6t-5.5 14.29q0 8.28 5.5 14.5Q646-339 655-339ZM180-820v295-4 389-680 186-186Zm99 400h166.54Q458-437 473-452t32-28H279v60Zm0 170h123q-2-14-1.5-29.5T403-310H279v60ZM180-80q-24 0-42-18t-18-42v-680q0-24 18-42t42-18h361l219 219v155q-14-6-29-11t-31-8v-109H511v-186H180v680h259q11 17 23.96 32.09Q475.91-92.82 492-80H180Zm475-389q80.51 0 137.26 56.74Q849-355.51 849-275q0 80.51-56.74 137.26Q735.51-81 655-81q-80.51 0-137.26-56.74Q461-194.49 461-275q0-80.51 56.74-137.26Q574.49-469 655-469Z"/></svg>
+            </div>
+            <br>
+            <p id="modal-message" class="modalMessage"></p>
+            <div id="close-btn" class="close-btn" >
+               <a href={% url 'mis-favoritos' %} id="plinkBook"><p >Ver mis favoritos</p></a>
+            </div>
+        </div>
+    </div>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js"></script>
+
+    <script>
+        let openModal = document.getElementById('openModal');
+        let modal = document.getElementById('modal');
+        let closeModal = document.getElementById('close');
+        let closeBtn = document.getElementById('close-btn');
+        let modalTitle = document.getElementById('modal-title');
+        let modalMessage = document.getElementById('modal-message');
+        
+        openModal.onclick = function(){
+            let itemId = openModal.getAttribute('data-item-id');
+            let itemType = 'book';
+            fetch(`/add_to_favorites/${itemType}/${itemId}/`) // Ajusta según tu URL y parámetros
+                .then(response => response.json())
+                .then(data => {
+                    modalTitle.innerText = data.status;
+                    modalMessage.innerText = data.message;
+                    modal.style.visibility = "visible";
+                });
+        }
+        
+        closeModal.onclick = function(){
+            modal.style.visibility = "hidden";
+        }
+        
+        closeBtn.onclick = function(){
+            modal.style.visibility = "hidden";
+        }
+        
+        modal.onclick = function(event){
+            if (event.target == modal) {
+                modal.style.visibility = "hidden";
+            }
+        }
+        
+
+       function openModalBook() {
+            document.getElementById("myModal").style.display = "flex";
+        }
+        
+        function closeModalBook() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+    /*tools pdf*/
+
+
+   /*var pdfDoc = null,
+        pageNum = 1,
+        scale = 1.0,
+        canvas = document.getElementById('pdfCanvas'),
+        ctx = canvas.getContext('2d');
+
+    // Cargar el PDF
+    pdfjsLib.getDocument('{{ book.files.url }}').promise.then(function(pdf) {
+        pdfDoc = pdf;
+        renderPage(pageNum);
+    });
+
+    function renderPage(num) {
+        pdfDoc.getPage(num).then(function(page) {
+            var viewport = page.getViewport({ scale: scale });
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+            
+            var renderContext = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+            page.render(renderContext);
+        });
+    }
+
+    function prevPage() {
+        if (pageNum <= 1) {
+            return;
+        }
+        pageNum--;
+        renderPage(pageNum);
+    }
+
+    function nextPage() {
+        if (pageNum >= pdfDoc.numPages) {
+            return;
+        }
+        pageNum++;
+        renderPage(pageNum);
+    }
+
+    function zoomIn() {
+        scale += 0.1;
+        renderPage(pageNum);
+    }
+
+    function zoomOut() {
+        if (scale > 0.1) {
+            scale -= 0.1;
+            renderPage(pageNum);
+        }
+    }
+
+    function closeModalBook() {
+        document.getElementById('myModal').style.display = 'none';
+    }*/
+
+ </script>
+    
+{% endblock %}

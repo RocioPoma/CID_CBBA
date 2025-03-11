@@ -1,0 +1,172 @@
+{% extends 'inicio/baseHome.html' %}
+
+
+{% block content %}
+    
+    <h2 class="Favtitle">MIS FAVORITOS</h2>
+    <div class=="containerFav">
+        <label for="filter" class="labelFilterFav">Selecciona una opción:</label>
+        <select id="filter" onchange="filterChange()" class="filterFav">
+            <option value="books">Libros</option>
+            <option value="thesis">Tesis</option>
+        </select>
+
+        <a href="#" class="btn-favorite align-right" style="margin-left: 2em; round">Gestión de conociemiento IA</a>
+    </div>
+
+    <!--Books-->
+    <div id="books-slider" class="slider">
+        <button class="left-arrow" onclick="moveLeft('books-slider')">&#10094;</button>
+        <div class="slider-wrapper">
+            <div class="slider-cards">
+                {% for favorite in favorites %}
+                    {% if favorite.book %}
+                        <div class="card">
+                            {% if  favorite.book.images %}
+                                <img class="imfFav" src="{{ favorite.book.images.url }}" alt="{{ book.title }}">
+                            {% endif %}
+                            <h3 class="titleFav">{{ favorite.book.title }}</h3>
+                            <p class="authorFav">{{ favorite.book.author }}</p>
+                            <!-- New Icons Section -->
+                            <div class="icon-container">
+                                <div class="elemento1">
+                                    <button type="button" style="background:none;border:none;padding:0;" 
+                                            data-pdf-url="{{ favorite.book.files.url }}" 
+                                            data-book-title="{{ favorite.book.title }}" 
+                                            onclick="openModalBook(this)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0000F5">
+                                            <path d="M480-160q-48-38-104-59t-116-21q-42 0-82.5 11T100-198q-21 11-40.5-1T40-234v-482q0-11 5.5-21T62-752q46-24 96-36t102-12q58 0 113.5 15T480-740v484q51-32 107-48t113-16q36 0 70.5 6t69.5 18v-480q15 5 29.5 10.5T898-752q11 5 16.5 15t5.5 21v482q0 23-19.5 35t-40.5 1q-37-20-77.5-31T700-240q-60 0-116 21t-104 59Zm80-200v-380l200-200v400L560-360Zm-160 65v-396q-33-14-68.5-21.5T260-720q-37 0-72 7t-68 21v397q35-13 69.5-19t70.5-6q36 0 70.5 6t69.5 19Zm0 0v-396 396Z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                
+                                <!--span class="icon" id="ver">Ver</span-->
+                                <div class="elemento2">
+                                    <button type="button" style="background:none;border:none;padding:0;" 
+                                            onclick="fetchSummary('{{ favorite.book.id }}')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffcc00">
+                                            <path d="M400-400h160v-80H400v80Zm0-120h320v-80H400v80Zm0-120h320v-80H400v80Zm-80 400q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                
+                
+                                <!--span class="icon" id="resumen">Resumen</span-->
+                                <div class="elemento3">
+                                    <form action="{% url 'delete_favorite' favorite.id %}" method="post" style="display:inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" style="background:none;border:none;padding:0;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EA3323">
+                                                <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
+                
+                                <!--span class="icon" id="borrar">Borrar</span-->
+                               
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <button class="right-arrow" onclick="moveRight('books-slider')">&#10095;</button>
+    </div>
+   
+    
+
+
+    <div id="myModal" class="modal">
+        <div class="modal-content-book">
+            <span class="close-book" onclick="closeModalBook()">&times;</span>
+            <h2></h2>
+            <iframe id="pdfViewer" width="100%" height="600px"></iframe>
+        </div>
+    </div>
+   
+    
+    <div id="myModalSummary" class="modal-resumen">
+        <div class="modal-content-book-resumen">
+            <span class="close-summary" onclick="closeModalSummary()">&times;</span>
+            <h2 class="h2Resumen">Resumen</h2>
+            <div class="card-summary">
+                <p id="summaryContent" class="pResumen"></p>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+
+
+    <!--Thesis-->
+
+    <div id="thesis-slider" class="slider" style="display: none;">
+        <button class="left-arrow" onclick="moveLeft('thesis-slider')">&#10094;</button>
+        <div class="slider-wrapper">
+            <div class="slider-cards">
+                {% for favorite in favorites %}
+                    {% if favorite.thesis %}
+                        <div class="card">
+                            <h3>{{ favorite.thesis.title }}</h3>
+                            <p>{{ favorite.thesis.author }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <button class="right-arrow" onclick="moveRight('thesis-slider')">&#10095;</button>
+    </div>
+
+
+
+    
+    
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js"></script>
+
+    <script>
+        /*scripts book*/
+        function openModalBook(element) {
+            const pdfUrl = element.getAttribute('data-pdf-url');
+            const bookTitle = element.getAttribute('data-book-title');
+            if (typeof pdfUrl === 'string' && pdfUrl.trim() !== '') {
+                document.getElementById("pdfViewer").src = pdfUrl + "#toolbar=0";
+                document.getElementById("myModal").style.display = "flex";
+                document.querySelector("#myModal h2").innerText = bookTitle;
+            } else {
+                console.error("Invalid PDF URL");
+            }
+        }
+        
+        function closeModalBook() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+
+        function fetchSummary(bookId) {
+            fetch(`/summarize/${bookId}/`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("summaryContent").innerText = data.summary;
+                    document.getElementById("myModalSummary").style.display = "flex";
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        
+        function closeModalSummary() {
+            document.getElementById("myModalSummary").style.display = "none";
+        }
+        
+
+
+        /*scripts Thesis*/
+        
+
+    </script>
+         
+{% endblock %}

@@ -1,0 +1,159 @@
+
+{% extends 'layout/base.html' %}
+
+{% block 'title' %} Books {{ book.title }} {% endblock  %}
+
+{% block 'content' %}
+<br>
+<div class="sm:flex sm:items-end sm:justify-start boton-modal">
+        <a href="{% url 'book' %}" class="block bg-yellow-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-yellow-400">
+          <label for="btn-modal">Back</label>
+        </a>
+        
+      </div>
+<br>
+<br>
+<article class="flex bg-white transition hover:shadow-xl">
+        <div class="rotate-180 p-2 [writing-mode:_vertical-lr]">
+          <time
+            datetime="2022-10-10"
+            class="flex items-center justify-between gap-4 text-xs font-bold uppercase text-gray-900"
+          >
+            <span>Publish date:</span>
+            <span class="w-px flex-1 bg-gray-900/10"></span>
+            <span>{{ book.publish_date }}</span>
+          </time>
+        </div>
+      
+        <div class="hidden sm:block sm:basis-56">
+                {% if  book.images %}
+                <img
+                  alt="{{ book.title }}"
+                  src="{{ book.images.url }}"
+                  class="aspect-square h-full w-full object-cover"
+                />
+    
+                {% endif %}
+        </div>
+      
+        <div class="flex flex-1 flex-col justify-between">
+          <div class="border-s border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
+            <a href="#">
+              <h3 class="font-bold uppercase text-gray-900">
+                <b>Title: </b>{{ book.title }}
+              </h3>
+            </a>
+            <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
+              <li><b>ID: </b>{{ book.id }}.</li>
+           </p>
+
+            <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
+                <li><b>Author: </b>{{ book.author }}.</li>
+            </p>
+            <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
+                <li><b>Area: </b>{{ book.area }}.</li>
+              </p>
+              <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
+                <li><b>Editorial: </b>{{ book.editorial }}.</li>
+              </p>
+              <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
+                <li><b>Pages: </b>{{ book.pages }}</li>
+              </p>
+              <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
+                <li><b>Description: </b>{{ book.description }}</li>
+              </p>
+              <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
+                <li><b>Keyword: </b>{{ book.kword }}</li>
+              </p>
+              <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
+                <li><b>Files: </b>{{ book.files }}</li>
+              </p>
+          </div>
+        </div>
+          <div class="sm:flex sm:items-end sm:justify-end">
+            <a
+              href="{{book.files.url}}"
+              class="block bg-yellow-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-yellow-400">
+              Read document
+            </a>
+            <!-- Botón para agregar a favoritos --> 
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+            <a
+            href="{% url 'add_to_favorites' 'book' book.id %}"
+            class="block bg-blue-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-blue-400">
+            Add to Favorites
+        </a>
+       
+
+          </div> 
+      </article>
+
+
+      <script>
+        document.querySelectorAll('.menu .enlace').forEach(item => {
+            item.addEventListener('click', event => {
+                event.preventDefault();
+        
+                // Obtener el nombre de la sección
+                const section = item.querySelector('span').textContent.trim().toLowerCase().replace(' ', '-');
+        
+                // Construir la URL basada en las rutas de Django
+                let url = '';
+                if (section === 'my-list') {
+                    url = `/add_to_favorites/book/${bookId}/`; 
+                }
+                // Agrega más condiciones para otras secciones aquí
+        
+                if (url) {
+                    fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': getCookie('csrftoken'),  // Asegúrate de tener el token CSRF
+                            'Content-Type': 'application/json',
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message);  // Muestra el mensaje en un alert
+                        // Inyectar el contenido en el contenedor del dashboard si es necesario
+                        if (data.status === 'success') {
+                          alert(data.message); //Mostra alerta de exito
+                           document.querySelector('.dashboard-content').innerHTML = data.content;  // Ajusta según tu necesidad
+                        }else if(data.status == 'info'){
+                            alert(data.message); //mostrar alerta de información
+                        }
+                    })
+                    .catch(error => console.error('Error al cargar el contenido:', error));
+                }
+            });
+        });
+        
+        // Función para obtener el token CSRF
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        </script>
+        
+
+
+      {% include 'book/partials/modal.html' %}
+
+
+{% endblock  %}

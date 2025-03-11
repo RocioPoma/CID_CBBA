@@ -1,0 +1,200 @@
+/* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.bodies {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: sans-serif;
+    background-color: powderblue;
+}
+
+/* Book */
+/*.book {
+    position: relative;
+    width: 350px;
+    height: 500px;
+    transition: transform 0.5s;
+}
+
+.paper { position: absolute;
+     width: 100%; 
+     height: 100%;
+      background-color: white;
+       transform-origin: left;
+        transition: transform 1s;
+
+}
+
+.front,
+.back {
+    background-color: white;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform-origin: left;
+    transition: transform 0.5s;
+}
+
+.front {
+    z-index: 1;
+    backface-visibility: hidden;
+    border-left: 3px solid powderblue;
+}
+
+.back {
+    z-index: 0;
+}
+
+.front-content,
+.back-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-content {
+    transform: rotateY(180deg)
+}
+
+.flipped { 
+    transform: rotateY(-180deg)
+}
+
+/* Paper flip effect */
+/*.flipped .front,
+.flipped .back {
+    transform: rotateY(-180deg);
+}
+
+/* Controller Buttons */
+/*button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin: 10px;
+    transition: transform 0.5s;
+}
+
+button:focus {
+    outline: none;
+}
+
+button:hover i {
+    color: #636363;
+}
+
+i {
+    font-size: 50px;
+    color: gray;
+}
+
+/* Paper stack order */
+/*#p1 {
+    z-index: 3;
+}
+
+#p2 {
+    z-index: 2;
+}
+
+#p3 {
+    z-index: 1;
+}
+
+.paper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    transform-origin: left;
+    transition: transform 1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paper canvas {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.flipped {
+    transform: rotateY(-180deg);
+}*/
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+header {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between; /* Ajusta esto según cómo quieras distribuir los elementos */
+    align-items: center;
+}
+
+nav ul {
+    display: flex;
+    gap: 20px; /* Ajusta el espacio entre los elementos según tu preferencia */
+}
+
+nav li {
+    list-style: none;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 15px;
+}
+
+.container {
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 20px; /* Add some margin to create space between the header and container */
+    text-align: center;
+}
+
+#pdf-viewer {
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

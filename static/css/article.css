@@ -1,0 +1,410 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+.container {
+    max-height: 1200px;
+    margin: 0 auto;
+}
+.titleart {
+    color: #003366; /* Azul marino */
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 750;
+    font-style: italic;
+}
+
+.horizontal-form {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: #003366;
+    padding: 10px;
+    border-radius: 5px;
+    color: #ffffff;
+    flex-wrap: nowrap; /* Evita que los elementos se envuelvan a una nueva línea */
+}
+
+.horizontal-form select,
+.horizontal-form button {
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+}
+
+.horizontal-form button {
+    background-color: #ffcc00;
+    color: #003366;
+    cursor: pointer;
+}
+
+.horizontal-form button:hover {
+    background-color: #ffffff;
+    border: 3px solid #ffcc00;
+    font-weight: bold;
+}
+
+#content {
+    margin-top: 20px;
+}
+
+.search-bara {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #003366;
+    padding: 10px;
+    border-radius: 5px;
+    flex-wrap: nowrap; /* Evita que los elementos se envuelvan a una nueva línea */
+}
+
+.search-bara input[type="text"] {
+    padding: 5px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    color: #003366;
+}
+
+.search-bara button {
+    background-color: #ffcc00;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #003366;
+}
+
+.search-bara button:hover {
+    background-color: #ffffff;
+    
+}
+
+.searchart {
+    color: #003366;
+}
+
+.filvalue {
+    color: #003366;
+}
+
+/*
+.contenido {
+    max-width: 1200px;
+    width: 100%;
+    margin: 40px auto;
+    display: flex;
+}
+
+.mostrador {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan a nuevas líneas */
+   /* gap: 10px; /* Espacio entre los elementos */
+   /* width: 100%;
+    transition: .5s ease;
+}
+
+.mostrador .item {
+    flex: 1 1 calc(16.66% - 10px); /* Hace que cada ítem ocupe aproximadamente 1/6 del ancho, menos el espacio del gap */
+   /* box-sizing: border-box; /* Incluye el padding y el border en el tamaño total */
+    /*max-width: calc(16.66% - 10px);
+    text-align: center;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: .3s;
+    padding: 30px;
+    height: 410px;
+}
+
+.mostrador .item:hover {
+    background-color: #e6e6e6;
+}
+
+.mostrador .item img {
+    width: 100%;
+    margin: 30px 0;
+    height: auto;
+    display: block;
+}
+
+.mostrador .item .descripcion {
+    color: #707070;
+    font-weight: bold;
+}
+
+.mostrador .item .precio {
+    color: #f85151;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.seleccion {
+    transition: .5s ease;
+    opacity: 0;
+    width: 0%;
+    border: 1px solid #ccc;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.cerrar {
+    position: absolute;
+    right: 0;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.info {
+    padding: 20px;
+    background-color: #00336671;
+}
+
+.info img {
+    display: block;
+    margin: 30px auto;
+    width: 80%;
+}
+
+.info h2 {
+    color: #707070;
+    margin-bottom: 10px;
+}
+
+.info p {
+    font-size: 14px;
+    color: #707070;
+    margin-bottom: 10px;
+}
+
+.info .precio {
+    font-size: 16px;
+    font-weight: bold;
+    color: #003366;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.info .fila {
+    display: flex;
+    align-items: flex-end;
+}
+
+.info .fila label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.info .fila select {
+    width: 100px;
+    font-size: 18px;
+    padding: 6px;
+    margin-right: 30px;
+}
+
+#ptitle1, #ptitle2 {
+    color: #003366; /* Azul marino */
+   /* font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 750;
+    font-style: italic;
+    font-size: 12px;
+    text-align: justify;
+}
+
+.stitle2 {
+    color: #ffcc00; /* Azul marino */
+   /* font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bolder;
+    font-style: italic;
+    font-size: 14px;
+    text-align: justify;
+}
+
+.btnpreview {
+    background-color: #ffcc00;
+    color: #003366;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px solid #003366;
+    border-radius: 5px;
+}
+
+.btnpreview:hover {
+    background-color: #ffffff;
+    color: #003366;
+    border: 1px solid #ffcc00;
+    font-weight: bold;
+}
+*/
+
+/*div.galeria {
+    margin: 10px 20px;
+    box-shadow: 0 4px 8px 0 #003366, 0 6px 20px 0 rgba(0,0,0,0.19);
+    float: left;
+    width: 220px;
+
+}
+
+div.galeria img {
+    width: 100%;
+    height: auto;
+}
+
+div.galeria:hover {
+    border: 3px solid #ffcc00;
+    transform: rotate(-3deg);
+
+}
+
+div.pie {
+    text-align: center;
+    text-decoration: 2px 2px 5px purple;
+    padding: 2px;
+    /*width: 100%;
+}*/
+
+/*#ptitle1, #ptitle2 {
+    color:#ffcc00; /* Azul marino */
+   /* font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 750;
+    font-style: italic;
+    font-size: 12px;
+    text-align: justify;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}*/
+
+/**/
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Alinea los elementos al centro */
+    max-height: calc(100vh - 80px); /* Ajusta la altura del contenedor para dejar espacio para el footer */
+    overflow-y: auto; /* Activa el scroll vertical */
+}
+
+.galeria-wrapper {
+    margin: 10px;
+    flex: 0 0 calc(33.333% - 20px); /* Tres columnas */
+    box-sizing: border-box;
+}
+
+.galeria {
+    border: 2px solid #003366;
+    border-radius: 2%;
+    padding: 10px;
+    background-color: #fff;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Añade una transición suave */
+}
+
+.galeria:hover {
+    background-color: #003366; /* Cambia el color de fondo al pasar el mouse */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Añade una sombra para resaltar */
+    border: 3px solid #ffcc00;
+    transform: rotate(-1.5deg);
+    color: #003366;
+}
+
+.galeria:hover {
+    background-color: #003366; /* Cambia el color de fondo al pasar el mouse */
+ 
+    color: #003366;
+}
+
+.borderart{
+    background-color: #ffffff;
+    color: #003366;
+}
+
+.foto {
+    cursor: pointer;
+    text-align: center; /* Centra las imágenes */
+}
+
+.imgarticle {
+    max-width: 100%;
+    height: auto;
+}
+
+.pie {
+    margin-top: 10px;
+}
+
+.piecontent {
+    display: flex;
+    flex-direction: column;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    border: none;
+}
+
+td {
+    padding: 5px;
+    /*border: 1px solid #ddd;*/
+    border: none;
+}
+
+tr {
+    border: none;
+}
+.dspart {
+    font-weight: bold;
+}
+
+
+
+
+
+.buttonarticle {
+    background-color: #ffcc00;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #003366;
+}
+
+.buttonarticle:hover {
+    background-color: #ffffff;
+    border: 3px solid #ffcc00;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.modal{
+    background-color:#ffcc0070;
+}
+
+.modal-content-book {
+    background-color: #003366ec;
+}
+.modal-content-book h2 {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 15px;
+    color:#ffcc00; /* Azul marino */
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 750;
+    font-style: italic;
+}
+
+.dspart{
+    font-weight: bolder;
+    color: #003366;
+}
+
+
